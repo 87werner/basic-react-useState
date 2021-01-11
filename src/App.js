@@ -1,25 +1,60 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
 
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [counter, setCounter] = useState( 0 );
+  const increaseCounter = () => {
+    setCounter(counter + 1 );
+  }
+  const decreaseCounter = () => {
+    setCounter(counter - 1);
+  }
+
+  const [friends, setFriends] = useState ([
+      {
+     name: "John",
+     Address: "london"
+    },
+    {
+      name: "Holy",
+      Address: "london"
+     },
+     {
+      name: "Peter",
+      Address: "london"
+     },
+    ])
+    const allFriends = friends.map((friend) => {
+          return (
+            <>
+          <h3>name: {friend.name}</h3>
+          <h3>address: {friend.Address}</h3>
+          </>
+          )
+    })
+
+const updateContact = () => {
+
+  const friendsCopy = [...friends]
+
+  friendsCopy[2].Address = "Berlin Germany"
+
+  setFriends(friendsCopy)
 }
 
+  return (
+    <>
+      <h1>React Hooks and useState </h1>
+      <h3>Counter: {counter}</h3>
+        {allFriends}
+      <button onClick={increaseCounter}>Increase</button>
+      <button onClick={decreaseCounter}>Decrement</button>
+      <button onClick={updateContact}>Change Address</button>
+    </>
+  );
+}
 export default App;
+
+
